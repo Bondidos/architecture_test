@@ -7,7 +7,9 @@ class CatalogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final itemList = GenerateItems().generateItems(20);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog'),
