@@ -1,7 +1,7 @@
+import 'package:architecture_test/model/catalog_item.dart';
+import 'package:architecture_test/state_model/app_state_container.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
-
-import '../item_source/items.dart';
 import '../widgets/checkout.dart';
 
 class CardPage extends StatefulWidget {
@@ -12,22 +12,12 @@ class CardPage extends StatefulWidget {
 }
 
 class _CardPageState extends State<CardPage> {
-  final itemList = GenerateItems().generateItems(20);
-
-  int calculatePrice() {
-    int result = 0;
-    for (var element in itemList) {
-      result += element.price;
-    }
-    return result;
-  }
-
-  void checkout() => setState(() {
-    itemList.clear();
-  });
-
   @override
   Widget build(BuildContext context) {
+
+    List<CatalogModel> cardList =
+        AppStateContainer.of(context, rebuild: false)?.state.cardItems ?? [];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Card"),
@@ -39,17 +29,17 @@ class _CardPageState extends State<CardPage> {
             Flexible(
               flex: 4,
               child: ListView.builder(
-                itemCount: itemList.length,
+                itemCount: cardList.length,
                 itemBuilder: (context, index) =>
-                    CatalogItem(item: itemList[index]),
+                    CatalogItem(item: cardList[index]),
               ),
             ),
-            Flexible(
+            const Flexible(
               flex: 1,
               child: CheckOut(
-                price: calculatePrice(),
-                checkout: () => checkout,
-              ),
+                  /*price: appState?.state.calculateBill() ?? 0,
+                checkout: appState?.clearCard(),*/
+                  ),
             ),
           ],
         ),

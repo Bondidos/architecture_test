@@ -1,4 +1,6 @@
 import 'package:architecture_test/routes/genereate_route.dart';
+import 'package:architecture_test/state_model/app_state_container.dart';
+import 'package:architecture_test/state_model/inherited_state.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,13 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Architecture',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return AppStateContainer(
+      state: AppState(),
+      child: MaterialApp(
+        title: 'Flutter Architecture',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: GenerateRoutes.generateRoute,
+        initialRoute: '/',
       ),
-      onGenerateRoute: GenerateRoutes.generateRoute,
-      initialRoute: '/',
     );
   }
 }

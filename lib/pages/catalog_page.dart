@@ -1,4 +1,5 @@
-import 'package:architecture_test/item_source/items.dart';
+import 'package:architecture_test/model/catalog_item.dart';
+import 'package:architecture_test/state_model/app_state_container.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
 
@@ -7,31 +8,26 @@ class CatalogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final itemList = GenerateItems().generateItems(20);
+    List<CatalogModel> catalog =
+        AppStateContainer.of(context, rebuild: false)?.state.catalog ?? [];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog'),
         actions: [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, 'card'),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                context, 'card', (route) => route.settings.name != '/'),
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
         ],
       ),
       body: ListView.builder(
-        itemCount: itemList.length,
+        itemCount: catalog.length,
         itemBuilder: (context, index) {
-          return CatalogItem(item: itemList[index]);
+          return CatalogItem(item: catalog[index]);
         },
       ),
     );
   }
 }
-
-
-
-
-
-

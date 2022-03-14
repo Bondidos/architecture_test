@@ -1,5 +1,7 @@
 import 'package:architecture_test/pages/card_page.dart';
 import 'package:architecture_test/pages/catalog_page.dart';
+import 'package:architecture_test/state_model/app_state_container.dart';
+import 'package:architecture_test/state_model/inherited_state.dart';
 import 'package:flutter/material.dart';
 
 class GenerateRoutes {
