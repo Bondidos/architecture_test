@@ -1,14 +1,15 @@
-import 'package:architecture_test/item_source/items.dart';
+import 'package:architecture_test/app_state/catalog.dart';
+import 'package:architecture_test/model/catalog_item.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CatalogPage extends StatelessWidget {
   const CatalogPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final itemList = GenerateItems().generateItems(20);
+    List<CatalogModel> itemList = Provider.of<Catalog>(context).items;
 
     return Scaffold(
       appBar: AppBar(

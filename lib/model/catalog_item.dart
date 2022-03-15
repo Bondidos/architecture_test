@@ -4,11 +4,11 @@ class CatalogModel {
   final Color color;
   final String name;
   final int price;
-  bool isAdded;
+  int id;
 
   CatalogModel(
       {required this.color,
       required this.name,
-      required this.isAdded,
+      required this.id,
       required this.price});
 }

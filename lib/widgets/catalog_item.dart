@@ -24,7 +24,7 @@ class CatalogItem extends StatelessWidget {
           ),
           Text(item.name),
           Price(price: item.price),
-          AddButton(isAdded: item.isAdded),
+          AddButton(id: item.id),
         ],
       ),
     );
