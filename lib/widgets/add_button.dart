@@ -1,5 +1,4 @@
 import 'package:architecture_test/state_model/app_state_container.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddButton extends StatelessWidget {
@@ -10,7 +9,6 @@ class AddButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppStateContainerState appState = AppStateContainer.of(context, rebuild: true)!;
-    print('rebuild');
     return IconButton(
       onPressed: () => appState.state.isInCard(id)
       ? appState.removeFromCard(id)

@@ -1,16 +1,14 @@
 import 'package:architecture_test/pages/card_page.dart';
-import 'package:architecture_test/pages/catalog_page.dart';
-import 'package:architecture_test/state_model/app_state_container.dart';
-import 'package:architecture_test/state_model/inherited_state.dart';
+import 'package:architecture_test/pages/app_state.dart';
 import 'package:flutter/material.dart';
 
 class GenerateRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => CatalogPage());
+        return MaterialPageRoute(builder: (_) => const CatalogPage());
       case 'card':
-        return MaterialPageRoute(builder: (_) => CardPage());
+        return MaterialPageRoute(builder: (_) => const CardPage());
       default:
         return MaterialPageRoute(
           builder: (context) => Scaffold(

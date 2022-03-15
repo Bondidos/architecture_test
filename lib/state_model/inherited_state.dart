@@ -5,7 +5,7 @@ class AppState{
   final List<CatalogModel> _list = [];
   final List<int> _cardItems = [];
   AppState(){
-    _list.addAll(GenerateItems().generateItems(150));
+    _list.addAll(GenerateItems().generateItems(20));
   }
 
   List<CatalogModel> get catalog => _list;

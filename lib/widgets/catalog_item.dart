@@ -1,5 +1,4 @@
 import 'package:architecture_test/model/catalog_item.dart';
-import 'package:architecture_test/state_model/app_state_container.dart';
 import 'package:architecture_test/widgets/price.dart';
 import 'package:flutter/cupertino.dart';
 

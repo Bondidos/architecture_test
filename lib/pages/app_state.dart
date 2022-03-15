@@ -16,8 +16,7 @@ class CatalogPage extends StatelessWidget {
         title: const Text('Catalog'),
         actions: [
           IconButton(
-            onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                context, 'card', (route) => route.settings.name != '/'),
+            onPressed: () => Navigator.pushNamed(context, 'card'),
             icon: const Icon(Icons.shopping_cart_outlined),
           ),
         ],

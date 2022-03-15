@@ -1,4 +1,3 @@
-import 'package:architecture_test/model/catalog_item.dart';
 import 'package:architecture_test/state_model/inherited_state.dart';
 import 'package:flutter/material.dart';
 
@@ -6,13 +5,16 @@ class AppStateContainer extends StatefulWidget {
   final AppState state;
   final Widget child;
 
-  AppStateContainer({required this.state, required this.child})
-      : super();
+  const AppStateContainer(Key? key,{required this.state, required this.child}) : super(key: key);
 
   static AppStateContainerState? of(BuildContext context, {required rebuild}) {
-    return rebuild ?
-        context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()?.data
-        : context.findAncestorWidgetOfExactType<_InheritedStateContainer>()?.data;
+    return rebuild
+        ? context
+            .dependOnInheritedWidgetOfExactType<_InheritedStateContainer>()
+            ?.data
+        : context
+            .findAncestorWidgetOfExactType<_InheritedStateContainer>()
+            ?.data;
   }
 
   @override
@@ -20,7 +22,6 @@ class AppStateContainer extends StatefulWidget {
 }
 
 class AppStateContainerState extends State<AppStateContainer> {
-
   late AppState state;
 
   @override
@@ -30,13 +31,16 @@ class AppStateContainerState extends State<AppStateContainer> {
   }
 
   void addItem(int id) => setState(() {
-    state.addItem(id);
-  });
+        state.addItem(id);
+      });
 
-  void removeFromCard(int id) =>
-      setState(() => state.removeFromCard);
+  void removeFromCard(int id) => setState(() {
+        state.removeFromCard(id);
+      });
 
-  void clearCard() => setState(state.clearCard);
+  void clearCard() => setState(() {
+        state.clearCard();
+      });
 
   @override
   Widget build(BuildContext context) {

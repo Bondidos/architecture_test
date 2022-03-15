@@ -16,7 +16,7 @@ class _CardPageState extends State<CardPage> {
   Widget build(BuildContext context) {
 
     List<CatalogModel> cardList =
-        AppStateContainer.of(context, rebuild: false)?.state.cardItems ?? [];
+        AppStateContainer.of(context, rebuild: true)?.state.cardItems ?? [];
 
     return Scaffold(
       appBar: AppBar(
