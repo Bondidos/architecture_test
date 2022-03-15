@@ -1,30 +1,11 @@
+import 'package:architecture_test/state_model/app_state_model.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
-
-import '../item_source/items.dart';
+import 'package:scoped_model/scoped_model.dart';
 import '../widgets/checkout.dart';
 
-class CardPage extends StatefulWidget {
+class CardPage extends StatelessWidget {
   const CardPage({Key? key}) : super(key: key);
-
-  @override
-  State<CardPage> createState() => _CardPageState();
-}
-
-class _CardPageState extends State<CardPage> {
-  final itemList = GenerateItems().generateItems(20);
-
-  int calculatePrice() {
-    int result = 0;
-    for (var element in itemList) {
-      result += element.price;
-    }
-    return result;
-  }
-
-  void checkout() => setState(() {
-    itemList.clear();
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +15,27 @@ class _CardPageState extends State<CardPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Flexible(
-              flex: 4,
-              child: ListView.builder(
-                itemCount: itemList.length,
-                itemBuilder: (context, index) =>
-                    CatalogItem(item: itemList[index]),
+        child: ScopedModelDescendant<AppStateModel>(
+          builder: (context, child, model) => Column(
+            children: [
+              Flexible(
+                flex: 4,
+                child: ListView.builder(
+                  itemCount: model.card.length,
+                  itemBuilder: (context, index) =>
+                      CatalogItem(item: model.card[index]),
+                ),
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: CheckOut(
-                price: calculatePrice(),
-                checkout: () => checkout,
+              Flexible(
+                flex: 1,
+                child: CheckOut(
+                  price: model.calculatePrice(),
+                  checkout: model.clearCard,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
+          rebuildOnChange: true,
         ),
       ),
     );
