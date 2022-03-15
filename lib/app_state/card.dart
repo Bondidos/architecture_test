@@ -13,7 +13,7 @@ class CardCheck extends ChangeNotifier {
       catalog.items.where((element) => _itemId.contains(element.id)).toList();
 
   int getPrice() =>
-      catalog.items.fold(0, (result, element) => result + element.price);
+      card.fold(0, (result, element) => result + element.price);
 
   set catalog(Catalog ctlg) {
     _catalog = ctlg;
