@@ -12,7 +12,7 @@ class GenerateItems {
         color: _randomColor.randomColor(),
         name: mockString(10),
         price: mockInteger(),
-        isAdded: false,
+        id: index,
       ),
     );
   }

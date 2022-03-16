@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:architecture_test/item_source/items.dart';
 import 'package:architecture_test/model/catalog_item.dart';
 import 'package:flutter/material.dart';
@@ -9,12 +8,12 @@ class AppState {
   final List<CatalogModel> _catalog;
   final List<int> _orderItems;
 
-  AppState._({
+  const AppState._({
     required List<CatalogModel> catalog,
-    required List<int> orderitems,
+    required List<int> orderItems,
   })
       : _catalog =catalog,
-        _orderItems = orderitems;
+        _orderItems = orderItems;
 
   factory AppState.initial(){
     final List<CatalogModel> initItems = [];
@@ -22,7 +21,7 @@ class AppState {
     initItems.addAll(catalog);
     List<int> orderItems = [];
 
-    return AppState._(catalog: initItems, orderitems: orderItems);
+    return AppState._(catalog: initItems, orderItems: orderItems);
   }
 
   AppState copyWith({
@@ -30,24 +29,20 @@ class AppState {
 }){
     return AppState._(
       catalog: _catalog,
-      orderitems: orderItems ?? this._orderItems,
+      orderItems: orderItems,
     );
   }
 
   UnmodifiableListView<int> get orderItems => UnmodifiableListView(_orderItems);
   UnmodifiableListView<CatalogModel> get catalog => UnmodifiableListView(_catalog);
-  void completeOrder() => _orderItems.clear();
+
+  List<CatalogModel> get inCard =>
+      catalog.where((i) => orderItems.contains(i.id)).toList();
+
   int getPrice() =>
-      catalog.fold(0, (result, element) => result + element.price);
-  void addToCard(int id) {
-    _orderItems.add(id);
-  }
+      orderItems.fold(0, (result, element) =>
+      result + catalog.firstWhere((it) => it.id == element).price);
 
-  void removeFromCard(int id) {
-    _orderItems.remove(id);
-  }
+  bool isInCard(int id) => orderItems.contains(id);
 
-  void clearCard() {
-    _orderItems.clear();
-  }
 }
