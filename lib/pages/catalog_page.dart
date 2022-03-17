@@ -1,15 +1,27 @@
-import 'package:architecture_test/item_source/items.dart';
+import 'package:architecture_test/app_state/app_state.dart';
+import 'package:architecture_test/app_state/app_state_bloc.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class CatalogPage extends StatelessWidget {
+class CatalogPage extends StatefulWidget {
   const CatalogPage({Key? key}) : super(key: key);
 
   @override
+  State<CatalogPage> createState() => _CatalogPageState();
+}
+
+class _CatalogPageState extends State<CatalogPage> {
+  late final AppStateBloc _appStateBloc;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _appStateBloc = Provider.of<AppStateBloc>(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
-
-    final itemList = GenerateItems().generateItems(20);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog'),
@@ -20,18 +32,17 @@ class CatalogPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: itemList.length,
-        itemBuilder: (context, index) {
-          return CatalogItem(item: itemList[index]);
-        },
+      body: StreamBuilder<AppState>(
+        initialData: _appStateBloc.appState,
+        stream: _appStateBloc.stream,
+        builder: ( context, snapshot) =>
+            ListView.builder(
+          itemCount: snapshot.data?.catalog.length,
+          itemBuilder: (context, index) {
+            return CatalogItem(item: snapshot.data!.catalog[index]);
+          },
+        ),
       ),
     );
   }
 }
-
-
-
-
-
-

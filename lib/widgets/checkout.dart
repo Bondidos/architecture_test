@@ -18,7 +18,7 @@ class CheckOut extends StatelessWidget {
         children: [
           Text('Price: $price'),
           ElevatedButton(
-            onPressed: checkout(),
+            onPressed: () => checkout(),
             child: const Text('CheckOut'),
           )
         ],

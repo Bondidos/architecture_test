@@ -10,6 +10,7 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       height: 60,
@@ -24,7 +25,7 @@ class CatalogItem extends StatelessWidget {
           ),
           Text(item.name),
           Price(price: item.price),
-          AddButton(isAdded: item.isAdded),
+          AddButton(id: item.id,),
         ],
       ),
     );
