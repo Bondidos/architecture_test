@@ -1,14 +1,13 @@
-import 'package:architecture_test/item_source/items.dart';
+import 'package:architecture_test/AppStateBloc/AppStateBloc.dart';
 import 'package:architecture_test/widgets/catalog_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CatalogPage extends StatelessWidget {
   const CatalogPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final itemList = GenerateItems().generateItems(20);
 
     return Scaffold(
       appBar: AppBar(
@@ -20,11 +19,14 @@ class CatalogPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: itemList.length,
-        itemBuilder: (context, index) {
-          return CatalogItem(item: itemList[index]);
-        },
+      body: BlocBuilder<AppStateBloc, AppState>(
+        builder: (BuildContext context, AppState appState) =>
+            ListView.builder(
+          itemCount: appState.catalog.length,
+          itemBuilder: (context, index) {
+            return CatalogItem(item: appState.catalog[index]);
+          },
+        ),
       ),
     );
   }

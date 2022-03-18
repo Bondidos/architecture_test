@@ -1,7 +1,6 @@
 import 'package:architecture_test/model/catalog_item.dart';
 import 'package:architecture_test/widgets/price.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'add_button.dart';
 
 class CatalogItem extends StatelessWidget {
@@ -24,7 +23,7 @@ class CatalogItem extends StatelessWidget {
           ),
           Text(item.name),
           Price(price: item.price),
-          AddButton(isAdded: item.isAdded),
+          AddButton(id: item.id),
         ],
       ),
     );
